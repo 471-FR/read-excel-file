@@ -99,7 +99,8 @@ export default function parseCellValue(value, type, {
       if (value === undefined) {
         break
       }
-      const parsedDate = new Date(value)
+      //On ne prend en charge que les dates au format YYYYMMDD
+      const parsedDate = new Date(Date.UTC(value.slice(0,4), value.slice(4,6) - 1, value.slice(6,8)));
       if (isNaN(parsedDate.valueOf())) {
         throw new Error(`Unsupported "date" cell value: ${value}`)
       }
